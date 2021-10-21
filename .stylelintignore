@@ -1,0 +1,7 @@
+src/content
+src/fonts
+src/images
+src/css/iconic
+*.txt
+*.json
+*.gif

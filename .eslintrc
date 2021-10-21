@@ -1,0 +1,57 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["simple-import-sort"],
+  "overrides": [
+    // typescript
+    {
+      "files": ["*.ts", "*.tsx"],
+      "excludedFiles": ["*.js"],
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/member-delimiter-style": 0,
+        "@typescript-eslint/interface-name-prefix": 0,
+        "@typescript-eslint/no-use-before-define": 0,
+        "react/prop-types": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0
+      }
+    }
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "eol-last": "warn",
+    "no-console": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
