@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/bunnyghp/static/js/main.38ab4a0a.chunk.js",
-    "main.js.map": "/bunnyghp/static/js/main.38ab4a0a.chunk.js.map",
+    "main.js": "/bunnyghp/static/js/main.5494717a.chunk.js",
+    "main.js.map": "/bunnyghp/static/js/main.5494717a.chunk.js.map",
     "runtime-main.js": "/bunnyghp/static/js/runtime-main.f6b9a6cc.js",
     "runtime-main.js.map": "/bunnyghp/static/js/runtime-main.f6b9a6cc.js.map",
     "static/js/2.3faaf654.chunk.js": "/bunnyghp/static/js/2.3faaf654.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.f6b9a6cc.js",
     "static/js/2.3faaf654.chunk.js",
-    "static/js/main.38ab4a0a.chunk.js"
+    "static/js/main.5494717a.chunk.js"
   ]
 }
