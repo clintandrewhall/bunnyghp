@@ -10,7 +10,7 @@ const options = {
   delimiter: ' ?',
 };
 
-export const OPTIONAL_SPACE = '{ }?';
+export const OPTIONAL_SPACE = '( |$)';
 export const QUERY = `${OPTIONAL_SPACE}:query(.+)?`;
 
 export const createRegistry = (
