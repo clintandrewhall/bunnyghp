@@ -1,3 +1,4 @@
+import { ROOT, HELP } from './constants';
 import { createRegistry } from './commands';
 import { definitions } from './config';
 import { Home } from './components';
@@ -13,16 +14,16 @@ export const App = () => {
   const { path, query } = useLocation();
 
   // All of this feels clunky, but it works for now.
-  if (path === '/' && query) {
+  if (path === ROOT && query) {
     window.location.replace(registry.toUrl(query) || '/');
     return null;
   }
 
   // Feels clunky, but it works.
-  if (path.startsWith('/home') || path === '/') {
+  if (path.startsWith(HELP) || path === ROOT) {
     return <Home {...{ registry, query }} />;
   }
 
-  window.location.replace('/');
+  window.location.replace(ROOT);
   return null;
 };

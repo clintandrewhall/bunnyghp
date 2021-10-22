@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ROOT } from '../constants';
 import { CommandRegistry } from '../types';
 
 interface Props {
@@ -11,7 +12,7 @@ export const InputForm = ({ registry, query }: Props) => {
 
   return (
     <div>
-      <form action="/" method="GET">
+      <form action={ROOT} method="GET">
         <input
           type="text"
           name="q"

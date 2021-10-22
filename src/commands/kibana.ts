@@ -17,7 +17,7 @@ export const kibana: () => CommandDefinition[] = () => [
       `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
         query ? `+${query}` : ''
       }`,
-    example: 'i test failure',
+    example: "'i' or 'i test failure'",
     desc: `Go to open issues, and optionally search`,
   },
   {
@@ -26,7 +26,7 @@ export const kibana: () => CommandDefinition[] = () => [
       `https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc${
         query ? `+${query}` : ''
       }`,
-    example: 'pr fix failure',
+    example: "'pr' or 'pr fix failure'",
     desc: `Go to open pull requests, and optionally search`,
   },
   {
@@ -39,14 +39,14 @@ export const kibana: () => CommandDefinition[] = () => [
     template: `t :team`,
     toUrl: ({ team }) => `https://github.com/orgs/elastic/teams/kibana-${team}`,
     desc: 'Go to a Kibana Team homepage on Github.',
-    example: 't presentation',
+    example: "'t ops' or 't presentation'",
   },
   {
     template: `tl :team`,
     toUrl: ({ team }) =>
       `https://github.com/elastic/kibana/labels/Team%3A${team}`,
     desc: "Go to a team's issue/pr label.",
-    example: 'tl presentation',
+    example: "'tl' or 'tl presentation'",
   },
   {
     template: `blockers${OPTIONAL_SPACE}:release?`,
@@ -55,7 +55,7 @@ export const kibana: () => CommandDefinition[] = () => [
         release ? `%2Cv${release}` : ''
       }`,
     desc: 'View blocker issues, and optionally filter by a release.',
-    example: 'blockers 7.15.0',
+    example: "'blockers' or 'blockers 7.15.0'",
   },
   {
     template: `cd${QUERY}`,
@@ -64,7 +64,7 @@ export const kibana: () => CommandDefinition[] = () => [
         ? `https://discuss.elastic.co/tags/c/elastic-stack/kibana/${query}`
         : 'https://discuss.elastic.co/c/elastic-stack/kibana',
     desc: 'View recent community discussions, optionally by tag',
-    example: 'cd canvas',
+    example: "'cd' or 'cd canvas'",
   },
   {
     template: `ci${OPTIONAL_SPACE}:release?`,
@@ -72,7 +72,7 @@ export const kibana: () => CommandDefinition[] = () => [
       `https://kibana-ci.elastic.co/${
         release ? `job/elastic+kibana+${release}` : ''
       }`,
-    example: 'ci 7.15',
+    example: "'ci' or 'ci 7.15'",
     desc: 'Go to CI, and optionally the build for a specific Kibana release.',
   },
   {
