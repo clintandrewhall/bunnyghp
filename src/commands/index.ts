@@ -12,6 +12,9 @@ const options = {
 
 export const OPTIONAL_SPACE = '( |$)';
 export const QUERY = `${OPTIONAL_SPACE}:query(.+)?`;
+export const PERSON = `:person([a-zA-Z0-9_]+)`;
+export const REPO = `:repo(\\w+\/\\w+)`;
+export const NUMBER = `:number(\\d+)`;
 
 export const createRegistry = (
   definitions: CommandDefinition[],

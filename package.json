@@ -1,7 +1,14 @@
 {
   "name": "bunnyghp",
+  "author": {
+    "name": "clintandrewhall",
+    "email": "clint@clintandrewhall.com",
+    "url": "https://clintandrewhall.com"
+  },
+  "bugs": {
+    "url": "https://github.com/clintandrewhall/bunnyghp/issues"
+  },
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://clintandrewhall.github.io/bunnyghp",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",

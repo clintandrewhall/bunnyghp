@@ -1,4 +1,5 @@
 import { CommandDefinition, CommandFn } from '../types';
+import { NUMBER, PERSON, REPO } from '.';
 
 const pri = (type: string, plural = false) => {
   switch (type) {
@@ -12,10 +13,7 @@ const pri = (type: string, plural = false) => {
   }
 };
 
-const PERSON = `:person([a-zA-Z0-9_]+)`;
-const REPO = `:repo(\\w+\/\\w+)`;
 const ASSET = `:asset(pr|issue|i)`;
-const NUMBER = `:number(\\d+)`;
 
 const person: CommandFn = () => [
   {
@@ -52,13 +50,13 @@ const repo: CommandFn = (repo) => [
     toUrl: ({ asset, number }) =>
       `https://github.com/${repo}/${pri(asset)}/${number}`,
     example: 'gh pr|i|issue 123',
-    desc: 'Go to a Github issue or pull request by number.',
+    desc: `Go to an issue or pull request for ${repo} by number.`,
   },
   {
     template: `gh ${NUMBER}`, // GH will resolve if item is a pull
     toUrl: ({ number }) => `https://github.com/${repo}/issues/${number}`,
     example: 'gh 123',
-    desc: 'Go to a Github issue or pull request by number.',
+    desc: `Go to an issue or pull request for ${repo} by number.`,
   },
   {
     template: `gh r ${ASSET}`,
@@ -67,13 +65,13 @@ const repo: CommandFn = (repo) => [
         asset,
       )}+is%3Aopen+sort%3Aupdated-desc`,
     example: 'gh r pr|i|issue',
-    desc: `Go to ${repo} open issues or pull requests.`,
+    desc: `Go to open issues or pull requests for ${repo}.`,
   },
   {
     template: `gh r ${NUMBER}`, // GH will resolve if item is a pull
     toUrl: ({ number }) => `https://github.com/${repo}/issues/${number}`,
     example: 'gh r 123',
-    desc: `Go to ${repo} open issue or pull request by number.`,
+    desc: `Go to open issues or pull requests for ${repo} by number.`,
   },
   {
     template: `gh r`,

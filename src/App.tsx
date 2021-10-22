@@ -1,22 +1,11 @@
-import { github, google, help, createRegistry, classic } from './commands';
+import { createRegistry } from './commands';
+import { definitions } from './config';
 import { Home } from './components';
 
 const useLocation = () => ({
   path: location.pathname,
   query: new URLSearchParams(window.location?.search).get('q') || '',
 });
-
-// hackity hackity
-const definitions = [
-  ...help(),
-  ...google(),
-  ...github.all({
-    // TODO: also allow for local storage
-    defaultPerson: process.env.REACT_APP_GITHUB_DEFAULT_PERSON,
-    defaultRepo: process.env.REACT_APP_GITHUB_DEFAULT_REPO,
-  }),
-  ...classic(),
-];
 
 const registry = createRegistry(definitions);
 
