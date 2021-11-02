@@ -27,3 +27,10 @@ You can use my deployment:
    2. `h`, `help`, or `home` for a list of commands.
 
 ...or you can fork and edit `config.ts` and deploy yourself.
+
+## For the bold
+
+If you want to make `bunnyghp` your default search engine, (without the Keyword), you can add `&s=1` to the end of the URL, and any search string will forward to Google:
+
+1. Search Engine: `bunnyghp` (or other)
+2. URL: `https://clintandrewhall.github.io/bunnyghp/?q=%s&s=1`

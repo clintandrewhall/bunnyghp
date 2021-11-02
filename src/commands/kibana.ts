@@ -3,31 +3,33 @@
 import { CommandDefinition } from '../types';
 import { QUERY, OPTIONAL_SPACE, NUMBER } from '.';
 
-export const kibana: () => CommandDefinition[] = () => [
-  {
-    template: `${NUMBER}`,
-    // Github will automatically resolve if issue is a pr, or vice versa.
-    toUrl: ({ number }) => `https://github.com/elastic/kibana/issues/${number}`,
-    example: '24924',
-    desc: `Go to an issue or pull request for Kibana, by number.`,
-  },
+export const kibana: (person?: string) => CommandDefinition[] = (person) => [
   {
     template: `i${QUERY}`,
     toUrl: ({ query }) =>
-      `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
+      `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc${
         query ? `+${query}` : ''
       }`,
-    example: "'i' or 'i test failure'",
-    desc: `Go to open issues, and optionally search`,
+    example: "'i' or 'i flaky test'",
+    desc: 'Go to your open Kibana issues, and optionally search.',
   },
   {
     template: `pr${QUERY}`,
     toUrl: ({ query }) =>
-      `https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc${
+      `https://github.com/pulls?q=is%3Apr+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc${
         query ? `+${query}` : ''
       }`,
-    example: "'pr' or 'pr fix failure'",
-    desc: `Go to open pull requests, and optionally search`,
+    example: "'pr' or 'pr test fix'",
+    desc: 'Go to your open Kibana pull requests, and optionally search.',
+  },
+  {
+    template: `blockers${OPTIONAL_SPACE}:release?`,
+    toUrl: ({ release }) =>
+      `https://github.com/elastic/kibana/issues?q=is%3Aopen+assignee%3A${person}+sort%3Aupdated-desc+label%3Ablocker${
+        release ? `%2Cv${release}` : ''
+      }`,
+    desc: 'View blocker issues, and optionally filter by a release.',
+    example: "'blockers' or 'blockers 7.15.0'",
   },
   {
     template: `n`,
@@ -49,13 +51,38 @@ export const kibana: () => CommandDefinition[] = () => [
     example: "'tl' or 'tl presentation'",
   },
   {
-    template: `blockers${OPTIONAL_SPACE}:release?`,
+    template: `k ${NUMBER}`,
+    // Github will automatically resolve if issue is a pr, or vice versa.
+    toUrl: ({ number }) => `https://github.com/elastic/kibana/issues/${number}`,
+    example: 'k 24924',
+    desc: `Go to an issue or pull request for Kibana, by number.`,
+  },
+  {
+    template: `k i${QUERY}`,
+    toUrl: ({ query }) =>
+      `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
+        query ? `+${query}` : ''
+      }`,
+    example: "'k i' or 'k i test failure'",
+    desc: `Go to open issues, and optionally search`,
+  },
+  {
+    template: `k pr${QUERY}`,
+    toUrl: ({ query }) =>
+      `https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc${
+        query ? `+${query}` : ''
+      }`,
+    example: "'k pr' or 'k pr fix failure'",
+    desc: `Go to open pull requests, and optionally search`,
+  },
+  {
+    template: `k blockers${OPTIONAL_SPACE}:release?`,
     toUrl: ({ release }) =>
       `https://github.com/elastic/kibana/issues?q=is%3Aopen+sort%3Aupdated-desc+label%3Ablocker${
         release ? `%2Cv${release}` : ''
       }`,
     desc: 'View blocker issues, and optionally filter by a release.',
-    example: "'blockers' or 'blockers 7.15.0'",
+    example: "'k blockers' or 'k blockers 7.15.0'",
   },
   {
     template: `cd${QUERY}`,

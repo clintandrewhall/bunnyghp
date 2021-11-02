@@ -10,7 +10,7 @@ import { kibana } from './commands/kibana';
 // Add or remove commands here.
 export const definitions = [
   ...help(),
-  ...kibana(), // TODO: remove this when fork is deployed.
+  ...kibana(process.env.REACT_APP_GITHUB_DEFAULT_PERSON), // TODO: remove this when fork is deployed.
   ...github.all({
     // TODO: also allow for local storage
     defaultPerson: process.env.REACT_APP_GITHUB_DEFAULT_PERSON,
