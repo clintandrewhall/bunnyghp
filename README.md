@@ -28,6 +28,18 @@ You can use my deployment:
 
 ...or you can fork and edit `config.ts` and deploy yourself.
 
+### URL Parameters
+
+There are a few parameters you can add to the URL, if you're using an instance that you haven't deployed yourself:
+
+ * `s=1`: if the path doesn't match, send the query to Google.
+ * `repo=xxx`: the default repo for Github commands.
+ * `person=xxx`: the default person for Github commands.
+
+For example:
+
+`https://clintandrewhall.github.io/bunnyghp/?q=%s&s=1&person=clintandrewhall&repo=clintandrewhall/bunnyghp`
+
 ## For the bold
 
 If you want to make `bunnyghp` your default search engine, (without the Keyword), you can add `&s=1` to the end of the URL, and any search string will forward to Google:
