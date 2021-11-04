@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Command } from '../types';
 
 interface Props {
@@ -7,15 +6,23 @@ interface Props {
 
 export const CommandList = ({ commands }: Props) => {
   return (
-    <dl>
-      {commands.map((item, key) => (
-        <Fragment key={'f' + key}>
-          <dt key={`dt-${key}`}>
-            <code>{item.example}</code>
-          </dt>
-          <dd key={`dd-${key}`}>{item.desc}</dd>
-        </Fragment>
-      ))}
-    </dl>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {commands.map((item, key) => (
+          <tr key={'f' + key}>
+            <td key={`dt-${key}`}>
+              <code>{item.example}</code>
+            </td>
+            <td key={`dd-${key}`}>{item.desc}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };

@@ -21,3 +21,11 @@ export interface CommandRegistry {
 
 export type CommandFn = (...params: string[]) => CommandDefinition[];
 export type URLFn = (query: string) => string | false;
+
+export interface AppParams {
+  search: boolean;
+  github?: {
+    person?: string;
+    repo?: string;
+  };
+}

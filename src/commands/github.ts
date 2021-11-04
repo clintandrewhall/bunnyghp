@@ -1,5 +1,7 @@
-import { CommandDefinition, CommandFn } from '../types';
+import { AppParams, CommandDefinition, CommandFn } from '../types';
 import { NUMBER, PERSON, REPO } from '.';
+
+const ASSET = `:asset(pr|issue|i)`;
 
 const pri = (type: string, plural = false) => {
   switch (type) {
@@ -13,9 +15,7 @@ const pri = (type: string, plural = false) => {
   }
 };
 
-const ASSET = `:asset(pr|issue|i)`;
-
-const person: CommandFn = () => [
+const personCommands: CommandFn = () => [
   {
     template: `gh ${PERSON}`,
     toUrl: ({ person }) => `https://github.com/${person}`,
@@ -44,7 +44,7 @@ const me: CommandFn = (person) => [
   },
 ];
 
-const repo: CommandFn = (repo) => [
+const repoCommands: CommandFn = (repo) => [
   {
     template: `gh ${ASSET} ${NUMBER}`,
     toUrl: ({ asset, number }) =>
@@ -119,24 +119,25 @@ const basic = () => [
   },
 ];
 
-const all = ({
-  defaultRepo,
-  defaultPerson,
-}: {
-  defaultRepo?: string;
-  defaultPerson?: string;
-}): CommandDefinition[] => {
-  let definitions = [...standard(), ...person()];
+const all = (params: AppParams['github']): CommandDefinition[] => {
+  let definitions = [...standard(), ...personCommands()];
 
-  if (defaultRepo) {
-    definitions = [...repo(defaultRepo), ...definitions];
+  if (params?.repo) {
+    definitions = [...repoCommands(params?.repo), ...definitions];
   }
 
-  if (defaultPerson) {
-    definitions = [...me(defaultPerson), ...definitions];
+  if (params?.person) {
+    definitions = [...me(params?.person), ...definitions];
   }
 
   return [...definitions, ...basic()];
 };
 
-export const github = { all, standard, person, repo, me, basic };
+export const github = {
+  all,
+  standard,
+  person: personCommands,
+  repo: repoCommands,
+  me,
+  basic,
+};
