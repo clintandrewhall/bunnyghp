@@ -1,7 +1,7 @@
 // TODO: remove this from this repo when the fork is (hopefully) deployed itself.
 
 import { CommandDefinition } from '../types';
-import { QUERY, OPTIONAL_SPACE, NUMBER } from '.';
+import { QUERY, OPTIONAL_SPACE, NUMBER, sortCommandDefinitions } from '.';
 
 export const kibana = (person?: string) => {
   let commands: CommandDefinition[] = [];
@@ -35,6 +35,11 @@ export const kibana = (person?: string) => {
         desc: `View Kibana blocker issues assigned to ${person}, and optionally filter by a release.`,
         example: 'blockers, blockers 7.15.0',
       },
+      {
+        template: `k me`,
+        toUrl: () => `https://github.com/${person}/kibana/`,
+        desc: `Go to the main branch of the ${person}/kibana repo.`,
+      },
     ];
   }
 
@@ -51,7 +56,7 @@ export const kibana = (person?: string) => {
       toUrl: ({ team }) =>
         `https://github.com/orgs/elastic/teams/kibana-${team}`,
       desc: 'Go to a Kibana Team homepage on Github.',
-      example: 't ops, t presentation ',
+      example: 't ops, t presentation',
     },
     {
       template: `tl :team`,
@@ -59,6 +64,15 @@ export const kibana = (person?: string) => {
         `https://github.com/elastic/kibana/labels/Team%3A${team}`,
       desc: "Go to a team's issue/pr label.",
       example: 'tl, tl presentation',
+    },
+    {
+      template: `k${QUERY}`,
+      toUrl: ({ query }) =>
+        query
+          ? `https://github.com/elastic/kibana/search?q=${query}`
+          : 'https://github.com/elastic/kibana/',
+      desc: `Go to the main branch of the elastic/kibana repo, and optionally search the codebase.`,
+      example: 'k, k toExpression',
     },
     {
       template: `k ${NUMBER}`,
@@ -74,7 +88,7 @@ export const kibana = (person?: string) => {
         `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
           query ? `+${query}` : ''
         }`,
-      example: 'k i, k i test failure ',
+      example: 'k i, k i test failure',
       desc: `Go to Kibana open issues, and optionally search`,
     },
     {
@@ -83,7 +97,7 @@ export const kibana = (person?: string) => {
         `https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc${
           query ? `+${query}` : ''
         }`,
-      example: 'k pr, k pr fix failure ',
+      example: 'k pr, k pr fix failure',
       desc: `Go to Kibana open pull requests, and optionally search`,
     },
     {
@@ -93,7 +107,7 @@ export const kibana = (person?: string) => {
           release ? `%2Cv${release}` : ''
         }`,
       desc: 'View Kibana blocker issues, and optionally filter by a release.',
-      example: 'k blockers, k blockers 7.15.0 ',
+      example: 'k blockers, k blockers 7.15.0',
     },
     {
       template: `cd${QUERY}`,
@@ -102,7 +116,7 @@ export const kibana = (person?: string) => {
           ? `https://discuss.elastic.co/tags/c/elastic-stack/kibana/${query}`
           : 'https://discuss.elastic.co/c/elastic-stack/kibana',
       desc: 'View recent community discussions, optionally by tag',
-      example: 'cd, cd canvas ',
+      example: 'cd, cd canvas',
     },
     {
       template: `ci${OPTIONAL_SPACE}:release?`,
@@ -110,13 +124,8 @@ export const kibana = (person?: string) => {
         `https://kibana-ci.elastic.co/${
           release ? `job/elastic+kibana+${release}` : ''
         }`,
-      example: 'ci, ci 7.15 ',
+      example: 'ci, ci 7.15',
       desc: 'Go to CI, and optionally the build for a specific Kibana release.',
-    },
-    {
-      template: `main`,
-      toUrl: () => `https://github.com/elastic/kibana`,
-      desc: 'Go to the main branch of the Kibana repository.',
     },
     {
       template: `eui`,
@@ -131,5 +140,5 @@ export const kibana = (person?: string) => {
     },
   ];
 
-  return commands;
+  return commands.sort(sortCommandDefinitions);
 };

@@ -1,9 +1,9 @@
 import { match as templateMatch } from 'path-to-regexp';
 import { CommandRegistry, CommandDefinition } from '../types';
+import { help } from './help';
 
 export { github } from './github';
 export { google } from './google';
-export { help } from './help';
 export { classic } from './classic';
 
 const options = {
@@ -16,9 +16,20 @@ export const PERSON = `:person([a-zA-Z0-9_]+)`;
 export const REPO = `:repo(\\w+\/\\w+)`;
 export const NUMBER = `:number(\\d+)`;
 
+export const sortCommandDefinitions = (
+  a: CommandDefinition,
+  b: CommandDefinition,
+) =>
+  (a.example || a.template).split(',')[0] <
+  (b.example || b.template).split(',')[0]
+    ? -1
+    : 1;
+
 export const createRegistry = (
   definitions: CommandDefinition[],
 ): CommandRegistry => {
+  definitions = [...help(), ...definitions];
+
   const commands = definitions.map(({ template, toUrl, example, desc }) => {
     const match = templateMatch(template, options);
 
