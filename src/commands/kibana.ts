@@ -4,10 +4,10 @@ import { CommandDefinition } from '../types';
 import { QUERY, OPTIONAL_SPACE, NUMBER, sortCommandDefinitions } from '.';
 
 export const kibana = (person?: string) => {
-  let commands: CommandDefinition[] = [];
+  let personCommands: CommandDefinition[] = [];
 
   if (person) {
-    commands = [
+    personCommands = [
       {
         template: `i${QUERY}`,
         toUrl: ({ query }) =>
@@ -41,10 +41,10 @@ export const kibana = (person?: string) => {
         desc: `Go to the main branch of the ${person}/kibana repo.`,
       },
     ];
+    personCommands = personCommands.sort(sortCommandDefinitions);
   }
 
-  commands = [
-    ...commands,
+  const commands: CommandDefinition[] = [
     {
       template: `n`,
       toUrl: () =>
@@ -140,5 +140,5 @@ export const kibana = (person?: string) => {
     },
   ];
 
-  return commands.sort(sortCommandDefinitions);
+  return [...personCommands, ...commands.sort(sortCommandDefinitions)];
 };
