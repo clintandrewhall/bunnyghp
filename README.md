@@ -21,7 +21,7 @@ You can use my deployment:
 3. Add `bunnyghp` to the list:
    1. Search Engine: `bunnyghp` (or other)
    2. Keyword: `b` (or your preference)
-   3. URL: `https://clintandrewhall.github.io/bunnyghp/?q=%s`
+   3. URL: `https://clintandrewhall.com/bunnyghp/?q=%s`
 4. Open Chrome, click the nav bar, type `b` and:
    1. your command, or
    2. `h`, `help`, or `home` for a list of commands.
