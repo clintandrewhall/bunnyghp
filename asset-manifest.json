@@ -1,17 +1,10 @@
 {
   "files": {
-    "main.js": "/bunnyghp/static/js/main.61a8a11f.chunk.js",
-    "main.js.map": "/bunnyghp/static/js/main.61a8a11f.chunk.js.map",
-    "runtime-main.js": "/bunnyghp/static/js/runtime-main.9d28d1ad.js",
-    "runtime-main.js.map": "/bunnyghp/static/js/runtime-main.9d28d1ad.js.map",
-    "static/js/2.5e9bbd67.chunk.js": "/bunnyghp/static/js/2.5e9bbd67.chunk.js",
-    "static/js/2.5e9bbd67.chunk.js.map": "/bunnyghp/static/js/2.5e9bbd67.chunk.js.map",
+    "main.js": "/bunnyghp/static/js/main.6101b1d2.js",
     "index.html": "/bunnyghp/index.html",
-    "static/js/2.5e9bbd67.chunk.js.LICENSE.txt": "/bunnyghp/static/js/2.5e9bbd67.chunk.js.LICENSE.txt"
+    "main.6101b1d2.js.map": "/bunnyghp/static/js/main.6101b1d2.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.9d28d1ad.js",
-    "static/js/2.5e9bbd67.chunk.js",
-    "static/js/main.61a8a11f.chunk.js"
+    "static/js/main.6101b1d2.js"
   ]
 }
