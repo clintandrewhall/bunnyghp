@@ -11,34 +11,35 @@
   "version": "0.1.0",
   "homepage": "https://clintandrewhall.github.io/bunnyghp",
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^13",
+    "@testing-library/user-event": "^14",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/parser": "^4.31.2",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-jest": "^24.3.5",
-    "eslint-plugin-prettier": "^3.4.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "eslint": "^8",
+    "eslint-config-prettier": "^9",
+    "eslint-plugin-jest": "^27",
+    "eslint-plugin-prettier": "^5",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint": "^7.24.0",
-    "gh-pages": "^3.2.3",
-    "husky": "^7.0.2",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.1",
-    "react-scripts": "^4.0.3",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-standard": "^21.0.0",
-    "stylelint": "^13.12.0",
-    "typescript": "^4.1.2"
+    "gh-pages": "^6",
+    "husky": "^9",
+    "prettier": "^3",
+    "pretty-quick": "^4",
+    "react-scripts": "^5",
+    "stylelint": "^16",
+    "stylelint-config-prettier": "^9",
+    "stylelint-config-standard": "^36",
+    "typescript": "4.9.5"
   },
   "dependencies": {
     "path-to-regexp": "^6.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +47,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx"
   },
   "husky": {
     "hooks": {
@@ -64,5 +66,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@4.8.1"
 }
