@@ -2583,24 +2583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.12.13, @babel/traverse@npm:^7.12.17":
-  version: 7.12.17
-  resolution: "@babel/traverse@npm:7.12.17"
-  dependencies:
-    "@babel/code-frame": "npm:^7.12.13"
-    "@babel/generator": "npm:^7.12.17"
-    "@babel/helper-function-name": "npm:^7.12.13"
-    "@babel/helper-split-export-declaration": "npm:^7.12.13"
-    "@babel/parser": "npm:^7.12.17"
-    "@babel/types": "npm:^7.12.17"
-    debug: "npm:^4.1.0"
-    globals: "npm:^11.1.0"
-    lodash: "npm:^4.17.19"
-  checksum: 10c0/53f3a62fe7937c102cc84a2e5a5e0fc63ef326555f7082422fe718c641b67ca87c712cf8a5dddf44e42b71b9af9565b91d0d1d748ff1704fc221feff51119859
-  languageName: node
-  linkType: hard
-
-"@babel/traverse@npm:^7.25.9, @babel/traverse@npm:^7.26.10, @babel/traverse@npm:^7.26.5, @babel/traverse@npm:^7.26.8, @babel/traverse@npm:^7.27.0, @babel/traverse@npm:^7.7.2":
+"@babel/traverse@npm:^7.12.13, @babel/traverse@npm:^7.12.17, @babel/traverse@npm:^7.25.9, @babel/traverse@npm:^7.26.10, @babel/traverse@npm:^7.26.5, @babel/traverse@npm:^7.26.8, @babel/traverse@npm:^7.27.0, @babel/traverse@npm:^7.7.2":
   version: 7.27.0
   resolution: "@babel/traverse@npm:7.27.0"
   dependencies:
