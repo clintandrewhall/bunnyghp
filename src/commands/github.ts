@@ -37,6 +37,11 @@ const me: CommandFn = (person) => [
     desc: 'Go to your open issues.',
   },
   {
+    template: `gh p`,
+    toUrl: () => `https://github.com/${person}?tab=projects`,
+    desc: 'Go to your projects.',
+  },
+  {
     template: `gh pr`,
     toUrl: () =>
       `https://github.com/pulls?q=is%3Apr+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc`,
@@ -57,6 +62,13 @@ const repoCommands: CommandFn = (repo) => [
     toUrl: ({ number }) => `https://github.com/${repo}/issues/${number}`,
     example: 'gh 123',
     desc: `Go to an issue or pull request for ${repo} by number.`,
+  },
+  {
+    template: `gh r p`,
+    toUrl: () =>
+      `https://github.com/${repo}/projects?query=is%3Aopen+author%3A%40me`,
+    example: 'gh r p',
+    desc: `Go to your projects for ${repo}.`,
   },
   {
     template: `gh r ${ASSET}`,

@@ -66,13 +66,10 @@ export const kibana = (person?: string) => {
       example: 'tl, tl presentation',
     },
     {
-      template: `k${QUERY}`,
-      toUrl: ({ query }) =>
-        query
-          ? `https://github.com/elastic/kibana/search?q=${query}`
-          : 'https://github.com/elastic/kibana/',
-      desc: `Go to the main branch of the elastic/kibana repo, and optionally search the codebase.`,
-      example: 'k, k toExpression',
+      template: `k p`,
+      toUrl: () =>
+        `https://github.com/elastic/kibana/projects?query=is%3Aopen+author%3A%40me`,
+      desc: `Go to your projects for the elastic/kibana repo.`,
     },
     {
       template: `k ${NUMBER}`,
@@ -110,6 +107,15 @@ export const kibana = (person?: string) => {
       example: 'k blockers, k blockers 7.15.0',
     },
     {
+      template: `k${QUERY}`,
+      toUrl: ({ query }) =>
+        query
+          ? `https://github.com/elastic/kibana/search?q=${query}`
+          : 'https://github.com/elastic/kibana/',
+      desc: `Go to the main branch of the elastic/kibana repo, and optionally search the codebase.`,
+      example: 'k, k toExpression',
+    },
+    {
       template: `cd${QUERY}`,
       toUrl: ({ query }) =>
         query
@@ -140,5 +146,5 @@ export const kibana = (person?: string) => {
     },
   ];
 
-  return [...personCommands, ...commands.sort(sortCommandDefinitions)];
+  return [...personCommands, ...commands];
 };
