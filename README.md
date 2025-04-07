@@ -21,7 +21,7 @@ You can use my deployment:
 3. Add `bunnyghp` to the list:
    1. Search Engine: `bunnyghp` (or other)
    2. Keyword: `b` (or your preference)
-   3. URL: `https://clintandrewhall.com/bunnyghp/?q=%s`
+   3. URL: `https://bunnyghp.clintandrewhall.com/?q=%s`
 4. Open Chrome, click the nav bar, type `b` and:
    1. your command, or
    2. `h`, `help`, or `home` for a list of commands.
@@ -38,11 +38,11 @@ There are a few parameters you can add to the URL, if you're using an instance t
 
 For example:
 
-`https://clintandrewhall.github.io/bunnyghp/?q=%s&s=1&person=clintandrewhall&repo=clintandrewhall/bunnyghp`
+`https://bunnyghp.clintandrewhall.com/?q=%s&s=1&person=clintandrewhall&repo=clintandrewhall/bunnyghp`
 
 ## For the bold
 
 If you want to make `bunnyghp` your default search engine, (without the Keyword), you can add `&s=1` to the end of the URL, and any search string will forward to Google:
 
 1. Search Engine: `bunnyghp` (or other)
-2. URL: `https://clintandrewhall.github.io/bunnyghp/?q=%s&s=1`
+2. URL: `https://bunnyghp.clintandrewhall.com/?q=%s&s=1`
