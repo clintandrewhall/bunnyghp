@@ -17,9 +17,10 @@ const useLocation = () => {
   const query = params.get(PARAM_QUERY) || '';
   const search = !!(params.get(PARAM_SEARCH) || false);
   const repo =
-    params.get(PARAM_GH_REPO) || process.env.REACT_APP_GITHUB_DEFAULT_REPO;
+    params.get(PARAM_GH_REPO) || import.meta.env.REACT_APP_GITHUB_DEFAULT_REPO;
   const person =
-    params.get(PARAM_GH_PERSON) || process.env.REACT_APP_GITHUB_DEFAULT_PERSON;
+    params.get(PARAM_GH_PERSON) ||
+    import.meta.env.REACT_APP_GITHUB_DEFAULT_PERSON;
 
   return {
     path: location.pathname.replace(/\//g, ''),
