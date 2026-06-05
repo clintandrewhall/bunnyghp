@@ -44,7 +44,7 @@ const me: CommandFn = (person) => [
   {
     template: `gh pr`,
     toUrl: () =>
-      `https://github.com/pulls?q=is%3Apr+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc`,
+      `https://github.com/pulls`,
     desc: 'Go to your open pull requests.',
   },
 ];
