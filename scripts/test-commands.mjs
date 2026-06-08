@@ -29,6 +29,11 @@ const source = `
     ['gh r pr', 'https://github.com/clintandrewhall/bunnyghp/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc'],
     ['gh r i', 'https://github.com/clintandrewhall/bunnyghp/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'],
     ['gh some-org', 'https://github.com/some-org'],
+    ['k 24924', 'https://github.com/elastic/kibana/issues/24924'],
+    ['k pr 24924', 'https://github.com/elastic/kibana/pull/24924'],
+    ['k i 24924', 'https://github.com/elastic/kibana/issues/24924'],
+    ['k pr test failure', 'https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc+author%3Aclintandrewhall+test failure'],
+    ['k i test failure', 'https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+assignee%3Aclintandrewhall+test failure'],
   ];
 
   for (const [query, url] of cases) {

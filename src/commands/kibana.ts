@@ -48,6 +48,20 @@ export const kibana = (person?: string) => {
       desc: `Go to an issue, pull request for Kibana, by number.`,
     },
     {
+      template: `k pr ${NUMBER}`,
+      toUrl: ({ number }) =>
+        `https://github.com/elastic/kibana/pull/${number}`,
+      example: 'k pr 24924',
+      desc: `Go to an elastic/kibana pull request by number.`,
+    },
+    {
+      template: `k i ${NUMBER}`,
+      toUrl: ({ number }) =>
+        `https://github.com/elastic/kibana/issues/${number}`,
+      example: 'k i 24924',
+      desc: `Go to an elastic/kibana issue by number.`,
+    },
+    {
       template: `k i${QUERY}`,
       toUrl: ({ query }) =>
         `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
