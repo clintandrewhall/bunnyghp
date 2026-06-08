@@ -12,18 +12,34 @@ const options = {
 
 export const OPTIONAL_SPACE = '( |$)';
 export const QUERY = `${OPTIONAL_SPACE}:query(.+)?`;
-export const PERSON = `:person([a-zA-Z0-9_]+)`;
+export const PERSON = `:person([a-zA-Z0-9][a-zA-Z0-9-]*)`;
 export const REPO = `:repo(\\w+\/\\w+)`;
 export const NUMBER = `:number(\\d+)`;
 
-export const sortCommandDefinitions = (
-  a: CommandDefinition,
-  b: CommandDefinition,
-) =>
-  (a.example || a.template).split(',')[0] <
-  (b.example || b.template).split(',')[0]
-    ? -1
-    : 1;
+const withNamespace = (prefix: string, value: string) => {
+  const parts = [prefix.trim(), value.trim()].filter(Boolean);
+  return parts.join(' ');
+};
+
+const namespaceExamples = (prefix: string, example: string) =>
+  example
+    .split(',')
+    .map((item) => withNamespace(prefix, item))
+    .join(', ');
+
+export const namespace = (
+  prefix: string | string[],
+  definitions: CommandDefinition[],
+): CommandDefinition[] =>
+  (Array.isArray(prefix) ? prefix : [prefix]).flatMap((namespacePrefix) =>
+    definitions.map((definition) => ({
+      ...definition,
+      template: withNamespace(namespacePrefix, definition.template),
+      example: definition.example
+        ? namespaceExamples(namespacePrefix, definition.example)
+        : undefined,
+    })),
+  );
 
 export const createRegistry = (
   definitions: CommandDefinition[],

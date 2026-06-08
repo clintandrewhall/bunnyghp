@@ -1,48 +1,16 @@
-// TODO: remove this from this repo when the fork is (hopefully) deployed itself.
-
 import { CommandDefinition } from '../types';
-import { QUERY, OPTIONAL_SPACE, NUMBER, sortCommandDefinitions } from '.';
+import { NUMBER, OPTIONAL_SPACE, QUERY } from '.';
 
 export const kibana = (person?: string) => {
-  let personCommands: CommandDefinition[] = [];
-
-  if (person) {
-    personCommands = [
-      {
-        template: `i${QUERY}`,
-        toUrl: ({ query }) =>
-          `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+assignee%3A${person}+archived%3Afalse+sort%3Aupdated-desc${
-            query ? `+${query}` : ''
-          }`,
-        example: 'i, i flaky test',
-        desc: `Go to open Kibana issues for ${person}, and optionally search.`,
-      },
-      {
-        template: `pr${QUERY}`,
-        toUrl: ({ query }) =>
-          `https://github.com/pulls?q=is%3Apr+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc${
-            query ? `+${query}` : ''
-          }`,
-        example: 'pr, pr test fix',
-        desc: `Go to open Kibana pull requests for ${person}, and optionally search.`,
-      },
-      {
-        template: `blockers${OPTIONAL_SPACE}:release?`,
-        toUrl: ({ release }) =>
-          `https://github.com/elastic/kibana/issues?q=is%3Aopen+assignee%3A${person}+sort%3Aupdated-desc+label%3Ablocker${
-            release ? `%2Cv${release}` : ''
-          }`,
-        desc: `View Kibana blocker issues assigned to ${person}, and optionally filter by a release.`,
-        example: 'blockers, blockers 7.15.0',
-      },
-      {
-        template: `k me`,
-        toUrl: () => `https://github.com/${person}/kibana/`,
-        desc: `Go to the main branch of the ${person}/kibana repo.`,
-      },
-    ];
-    personCommands = personCommands.sort(sortCommandDefinitions);
-  }
+  const personCommands: CommandDefinition[] = person
+    ? [
+        {
+          template: `k me`,
+          toUrl: () => `https://github.com/${person}/kibana/`,
+          desc: `Go to the main branch of the ${person}/kibana repo.`,
+        },
+      ]
+    : [];
 
   const commands: CommandDefinition[] = [
     {
@@ -73,7 +41,7 @@ export const kibana = (person?: string) => {
     },
     {
       template: `k ${NUMBER}`,
-      // Github will automatically resolve if issue is a pr,, vice versa.
+      // Github resolves issue URLs to PRs when needed.
       toUrl: ({ number }) =>
         `https://github.com/elastic/kibana/issues/${number}`,
       example: 'k 24924',
@@ -83,27 +51,33 @@ export const kibana = (person?: string) => {
       template: `k i${QUERY}`,
       toUrl: ({ query }) =>
         `https://github.com/elastic/kibana/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc${
-          query ? `+${query}` : ''
-        }`,
+          person ? `+assignee%3A${person}` : ''
+        }${query ? `+${query}` : ''}`,
       example: 'k i, k i test failure',
-      desc: `Go to Kibana open issues, and optionally search`,
+      desc: person
+        ? `Go to open elastic/kibana issues for ${person}, and optionally search.`
+        : `Go to elastic/kibana open issues, and optionally search.`,
     },
     {
       template: `k pr${QUERY}`,
       toUrl: ({ query }) =>
         `https://github.com/elastic/kibana/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc${
-          query ? `+${query}` : ''
-        }`,
+          person ? `+author%3A${person}` : ''
+        }${query ? `+${query}` : ''}`,
       example: 'k pr, k pr fix failure',
-      desc: `Go to Kibana open pull requests, and optionally search`,
+      desc: person
+        ? `Go to open elastic/kibana pull requests for ${person}, and optionally search.`
+        : `Go to elastic/kibana open pull requests, and optionally search.`,
     },
     {
       template: `k blockers${OPTIONAL_SPACE}:release?`,
       toUrl: ({ release }) =>
         `https://github.com/elastic/kibana/issues?q=is%3Aopen+sort%3Aupdated-desc+label%3Ablocker${
           release ? `%2Cv${release}` : ''
-        }`,
-      desc: 'View Kibana blocker issues, and optionally filter by a release.',
+        }${person ? `+assignee%3A${person}` : ''}`,
+      desc: person
+        ? `View elastic/kibana blocker issues assigned to ${person}, and optionally filter by a release.`
+        : 'View elastic/kibana blocker issues, and optionally filter by a release.',
       example: 'k blockers, k blockers 7.15.0',
     },
     {
