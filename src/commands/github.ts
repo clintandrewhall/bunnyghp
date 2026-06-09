@@ -36,7 +36,7 @@ const personCommands: CommandFn = () =>
 const personalSearchCommands: CommandFn = (person) =>
   ghAndRootNamespace([
     {
-      template: `i${QUERY}`,
+      template: `i ${QUERY}`,
       toUrl: ({ query }) =>
         `https://github.com/issues?q=is%3Aissue+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc${
           query ? `+${query}` : ''
@@ -45,7 +45,7 @@ const personalSearchCommands: CommandFn = (person) =>
       desc: 'Go to your open issues, and optionally search.',
     },
     {
-      template: `pr${QUERY}`,
+      template: `pr ${QUERY}`,
       toUrl: ({ query }) => {
         if (query) {
           return `https://github.com/pulls?q=is%3Apr+is%3Aopen+author%3A${person}+archived%3Afalse+sort%3Aupdated-desc+${query}`;

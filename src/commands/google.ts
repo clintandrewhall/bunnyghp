@@ -3,10 +3,10 @@ import { QUERY } from '.';
 
 export const google: () => CommandDefinition[] = () => [
   {
-    template: `g${QUERY}`,
+    template: `g ${QUERY}`,
     toUrl: ({ query }) =>
       `https://www.google.com${query ? `/search?q=${query}` : ''}`,
-    example: 'g how to google',
+    example: 'g, g how to google',
     desc: 'Search Google, or just go to Google.',
   },
 ];

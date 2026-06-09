@@ -10,15 +10,18 @@ const options = {
   delimiter: ' ?',
 };
 
-export const OPTIONAL_SPACE = '( |$)';
-export const QUERY = `${OPTIONAL_SPACE}:query(.+)?`;
+export const QUERY = ':query(.+)?';
+
 export const PERSON = `:person([a-zA-Z0-9][a-zA-Z0-9-]*)`;
 export const REPO = `:repo(\\w+\/\\w+)`;
 export const NUMBER = `:number(\\d+)`;
 
 const withNamespace = (prefix: string, value: string) => {
-  const parts = [prefix.trim(), value.trim()].filter(Boolean);
-  return parts.join(' ');
+  const trimmedPrefix = prefix.trim();
+  const trimmedValue = value.trim();
+  if (!trimmedPrefix) return trimmedValue;
+  if (!trimmedValue) return trimmedPrefix;
+  return `${trimmedPrefix} ${trimmedValue}`;
 };
 
 const namespaceExamples = (prefix: string, example: string) =>
@@ -26,6 +29,13 @@ const namespaceExamples = (prefix: string, example: string) =>
     .split(',')
     .map((item) => withNamespace(prefix, item))
     .join(', ');
+
+// Treat a spaced optional param as an optional segment: `g :query?` matches `g` and `g foo`.
+const templateExpression = (template: string) =>
+  template.replace(
+    / (:[a-zA-Z_][a-zA-Z0-9_]*(?:\([^)]*\))?)\?/g,
+    '{ $1}?',
+  );
 
 export const namespace = (
   prefix: string | string[],
@@ -47,7 +57,7 @@ export const createRegistry = (
   definitions = [...help(), ...definitions];
 
   const commands = definitions.map(({ template, toUrl, example, desc }) => {
-    const match = templateMatch(template, options);
+    const match = templateMatch(templateExpression(template), options);
 
     return {
       match,

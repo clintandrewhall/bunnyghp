@@ -1,19 +1,15 @@
 import { CommandDefinition } from '../types';
-import { OPTIONAL_SPACE, QUERY } from '.';
-
-const ZIP_CODE = `:zip(\\d{5})`;
+import { QUERY } from '.';
 
 export const classic: () => CommandDefinition[] = () => [
   {
-    template: 'lol',
-    toUrl: () => 'http://icanhascheezburger.com/?random',
-    desc: 'a random lolcat',
-  },
-  {
-    template: 'hoo :query',
-    toUrl: ({ query }) => `http://haskell.org/hoogle/?q=${query}`,
-    example: 'hoo how to hoogle',
-    desc: 'a hoogle (haskell + google) search',
+    template: `hoo ${QUERY}`,
+    toUrl: ({ query }) =>
+      query
+        ? `https://hoogle.haskell.org/?hoogle=${query}`
+        : 'https://hoogle.haskell.org/',
+    example: 'hoo, hoo Maybe a -> a',
+    desc: 'Search Hoogle, or go to the Hoogle homepage.',
   },
   {
     template: 'rickroll',
@@ -21,49 +17,35 @@ export const classic: () => CommandDefinition[] = () => [
     desc: "You Just Got Rick Roll'd By bunnyghp!",
   },
   {
-    template: `fb${QUERY}`,
+    template: `fb ${QUERY}`,
     toUrl: ({ query }) =>
-      `http://www.facebook.com/${query ? `s.php?q=${query}&init=q` : ''}`,
-    desc: 'search www.facebook.com or go there',
-    example: 'fb mark zuckerberg',
+      query
+        ? `https://www.facebook.com/search/top?q=${query}`
+        : 'https://www.facebook.com/',
+    example: 'fb, fb mark zuckerberg',
+    desc: 'Search Facebook, or go to the Facebook homepage.',
   },
   {
-    template: `yt${QUERY}`,
+    template: `yt ${QUERY}`,
     toUrl: ({ query }) =>
-      `http://www.youtube.com/${
-        query ? `results?search_query=${query}&search_type=&aq=-1&oq=` : ''
-      }`,
-    desc: 'searches YouTube or goes to it',
-    example: "yt i'm cool sushi 654 yeah",
+      query
+        ? `https://www.youtube.com/results?search_query=${query}`
+        : 'https://www.youtube.com/',
+    example: 'yt, yt lofi beats',
+    desc: 'Search YouTube, or go to the YouTube homepage.',
   },
   {
-    template: `bugcongress${OPTIONAL_SPACE}${ZIP_CODE}?`,
-    toUrl: ({ zip }) =>
-      `http://www.congress.org/congressorg/officials/congress/${
-        zip ? `?lvl=C&azip=${zip}` : ''
-      }`,
-    desc: 'looks up your senator or congressperson based on a zip code you give it, or just view a list',
-    example: 'bugcongress 40207',
-  },
-  {
-    template: `wa${QUERY}`,
+    template: `wa ${QUERY}`,
     toUrl: ({ query }) =>
-      `http://www.wolframalpha.com${query ? `/input/?i=${query}` : ''}`,
-    desc: 'searches Wolfram Alpha or goes there',
-    example: 'wa ultimate question',
-  },
-  {
-    template: `wikinvest${QUERY}`,
-    toUrl: ({ query }) =>
-      `http://www.wikinvest.com${
-        query ? `/Special/Search?search=%s${query}` : ''
-      }`,
-    desc: 'searches Wikinvest or goes there',
-    example: 'wikinvest 2008 Financial Crisis',
+      query
+        ? `https://www.wolframalpha.com/input?i=${query}`
+        : 'https://www.wolframalpha.com',
+    example: 'wa, wa ultimate question',
+    desc: 'Search Wolfram Alpha, or go to the Wolfram Alpha homepage.',
   },
   {
     template: 'time',
     toUrl: () => 'https://time.is/',
-    desc: 'shows the current time',
+    desc: 'Shows the current time.',
   },
 ];
